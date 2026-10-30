@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pawsitive - Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body class="home-body">
+  <header class="home-header">
+    <a href="/terms" class="terms-link">Terms & Conditions</a>
+  </header>
+
+  <main class="home-content">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Pawsitive Logo" class="logo-img" />
+
+    <p class="homepage-tagline">
+      Connecting paws and people — share moments, find homes, spread pawsitivity. 🐾
+    </p>
+
+    <div class="home-buttons">
+      <a href="/login" class="btn">Login</a>
+      <a href="/register" class="btn">Register</a>
+    </div>
+  </main>
+
+  <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+</body>
+</html>

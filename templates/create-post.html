@@ -1,0 +1,30 @@
+<!-- templates/createpost.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Post - Pawsitive</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <header class="adoption-header">
+    <h2>Create a New Post</h2>
+    <a href="{{ url_for('feed') }}" class="add-btn">← Back to Feed</a>
+  </header>
+
+  <main class="form-container">
+    <form action="{{ url_for('create_post') }}" method="POST" enctype="multipart/form-data">
+      <label for="media">Upload Photo or Video</label>
+      <input type="file" name="media" required />
+
+      <label for="caption">Caption</label>
+      <textarea name="caption" rows="3" required></textarea>
+
+      <button type="submit">Post</button>
+    </form>
+  </main>
+  <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+
+</body>
+</html>

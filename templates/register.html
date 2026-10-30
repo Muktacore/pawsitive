@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Pawsitive</title>
+    <!-- Link to your external stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Link to Inter font, if you plan to use it -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Function to go to step 2 of registration
+        function goToStep2(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Basic validation for step 1 fields
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (name && phone && email && username && password) {
+                document.getElementById('step1').style.display = 'none';
+                document.getElementById('step2').style.display = 'block';
+            } else {
+                // This will be styled by your CSS later
+                alert('Please fill in all fields for Step 1.'); // Using alert temporarily, will replace with custom message box via CSS/JS
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="form-container">
+        <form method="POST" action="/register" enctype="multipart/form-data">
+            <h2>Register</h2>
+
+            <!-- STEP 1 -->
+            <div id="step1">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="button" onclick="goToStep2(event)">Next</button>
+            </div>
+
+            <!-- STEP 2 -->
+            <div id="step2" style="display: none;">
+                <label for="profile_pic">Upload Profile Picture:</label>
+                <input type="file" id="profile_pic" name="profile_pic" accept="image/*" required>
+
+                <label for="bio">Bio:</label>
+                <textarea id="bio" name="bio" placeholder="Tell us about yourself..." required></textarea>
+
+                <label for="account_type">Registering as:</label>
+                <select id="account_type" name="account_type" required>
+                    <option value="user">User</option>
+                    <option value="ngo">NGO</option>
+                </select>
+
+                <button type="submit">Register</button>
+            </div>
+        </form>
+        <p style="text-align:center; margin-top: 10px;">
+            Already have an account? <a href="{{ url_for('login') }}">Login here</a>.
+        </p>
+
+    </div>
+    <!-- You can add any necessary JavaScript here, if it's not styling-related -->
+</body>
+</html>

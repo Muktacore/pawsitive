@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Pets - Pawsitive</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <style>
+    /* You can remove the .locator-options display: none; from here,
+       as we'll control its visibility with JavaScript, or if always visible, remove it. */
+    .locator-options button {
+      margin: 5px; /* Keep margin for spacing between buttons */
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      background-color: #4CAF50; /* Consider using your CSS variables for consistency: var(--primary-color) */
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .locator-options button:hover {
+      background-color: #388E3C; /* Consider using your CSS variables: var(--primary-dark) */
+    }
+  </style>
+</head>
+<body>
+ 
+  <header class="adoption-header">
+    <h2>My Pets</h2>
+    <div class="header-right">
+      <a href="{{ url_for('add_mypet') }}" class="add-btn">Add +</a>
+      <button class="locate-btn" onclick="toggleLocator()">📍 Locate Vet / Pet Shop</button>
+
+      <div class="locator-options" id="locatorOptions">
+        <button onclick="locateService('vet clinic')">Vet</button>
+        <button onclick="locateService('pet shop')">Pet Shop</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="adoption-cards">
+    {% if pets %}
+      {% for pet in pets %}
+        <div class="adoption-card">
+          <img src="{{ url_for('static', filename='uploads/' + pet['photo']) }}" alt="{{ pet['name'] }}" />
+          <div class="adoption-info">
+            <h3>{{ pet['name'] }}</h3>
+            <p>{{ pet['breed'] }} | {{ pet['age'] }}</p>
+            <p>🎂 Birthday: {{ pet['birthday'] }}</p>
+
+            <div class="health-checklist">
+              <p><strong>Health Tracking:</strong></p>
+              <ul>
+                <li>💉 Vaccination: {{ pet['vaccination'] }}</li>
+                <li>💊 Deworming: {{ pet['deworming'] }}</li>
+                <li>🩺 Next Vet Visit: {{ pet['vet'] }}</li>
+              </ul>
+            </div>
+
+            <form method="POST" action="{{ url_for('delete_pet', pet_id=pet['id']) }}" style="margin-top: 10px;">
+              <button type="submit" class="small-danger-btn">Delete Pet</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p style="text-align:center; padding: 20px;">You haven't added any pets yet. <a href="{{ url_for('add_mypet') }}">Add one now</a>.</p>
+    {% endif %}
+  </main>
+
+  <script>
+    function toggleLocator() {
+      const locator = document.getElementById('locatorOptions');
+      // Toggle 'display: flex' for visibility within the flex container
+      locator.style.display = locator.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function locateService(type) {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          position => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            // Corrected URL construction for Google Maps search
+            const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(type)}/@${lat},${lon},15z`;
+            window.open(mapsUrl, '_blank');
+          },
+          error => {
+            console.warn("Geolocation failed, using fallback search.");
+            const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(type)}`;
+            window.open(mapsUrl, '_blank');
+          }
+        );
+      } else {
+        // If browser doesn't support geolocation
+        const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(type)}`;
+        window.open(mapsUrl, '_blank');
+      }
+    }
+  </script>
+  <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+
+</body>
+</html>

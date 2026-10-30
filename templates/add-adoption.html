@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Pet for Adoption - Pawsitive</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  
+</head>
+<body>
+  <div class="form-container">
+   <form method="POST" enctype="multipart/form-data">
+  <h2>Add Pet for Adoption</h2>
+
+  <label>Upload Pet Photo:</label>
+  <input type="file" name="photo" accept="image/*" required />
+
+  <label>Pet Details:</label>
+  <textarea name="details" placeholder="Age, Breed, Temperament, Health info..." required></textarea>
+
+  <label>Your Name:</label>
+  <input type="text" name="contact_name" required />
+
+  <label>Contact Number:</label>
+  <input type="tel" name="contact_number" required />
+
+  <label>Location:</label>
+  <input type="text" name="location" required />
+
+  <button type="submit">Add Pet</button>
+</form>
+
+  </div>
+  <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+
+</body>
+</html>

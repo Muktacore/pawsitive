@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Settings - Pawsitive</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="form-container">
+    <form method="POST" action="{{ url_for('settings') }}" enctype="multipart/form-data">
+      <h2>Settings</h2>
+
+      <label>Change Profile Picture:</label>
+      <input type="file" name="profile_pic" accept="image/*" />
+
+      <label>Edit Bio:</label>
+      <textarea name="bio" placeholder="Update your bio...">{{ user['bio'] }}</textarea>
+
+      <label>Change Name:</label>
+      <input type="text" name="name" placeholder="Your name" value="{{ user['name'] }}" required>
+
+      <label>Update Phone:</label>
+      <input type="text" name="phone" placeholder="Phone number" value="{{ user['phone'] }}">
+
+      <label>Update Email:</label>
+      <input type="email" name="email" placeholder="Email" value="{{ user['email'] }}">
+
+      <label>
+        <input type="checkbox" id="darkToggle" onchange="toggleDarkMode()"> Enable Dark Mode
+      </label>
+
+      <button type="submit">Save Changes</button>
+    </form>
+
+    <form method="POST" action="{{ url_for('delete_account') }}">
+      <button type="submit" class="danger-btn">Delete My Account</button>
+    </form>
+
+
+    <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      const isDark = document.body.classList.toggle("dark-mode");
+      localStorage.setItem("darkMode", isDark ? "true" : "false");
+      document.getElementById('darkToggle').checked = isDark;
+    }
+
+    window.onload = function () {
+      const enabled = localStorage.getItem("darkMode");
+      const checkbox = document.getElementById('darkToggle');
+      if (enabled === "true") {
+        document.body.classList.add("dark-mode");
+        if (checkbox) checkbox.checked = true;
+      } else {
+        document.body.classList.remove("dark-mode");
+        if (checkbox) checkbox.checked = false;
+      }
+    };
+  </script>
+  <div class="corner-button">
+    <a href="{{ url_for('feed') }}" class="button">Go to Feed</a>
+  </div>
+
+</body>
+</html>

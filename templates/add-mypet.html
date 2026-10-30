@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add My Pet - Pawsitive</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="form-container">
+    <form method="POST" enctype="multipart/form-data" action="{{ url_for('add_mypet') }}">
+      <h2>Add Your Pet</h2>
+
+      <label>Pet Photo:</label>
+      <input type="file" name="photo" accept="image/*" required>
+
+      <label>Pet Name:</label>
+      <input type="text" name="pet_name" placeholder="e.g. Bruno" required>
+
+      <label>Breed:</label>
+      <input type="text" name="breed" placeholder="e.g. Golden Retriever" required>
+
+      <label>Age:</label>
+      <input type="text" name="age" placeholder="e.g. 3 years" required>
+
+      <label>Birthday:</label>
+      <input type="date" name="birthday" required>
+
+      <label>Vaccination Details:</label>
+      <textarea name="vaccination" placeholder="e.g. Vaccinated on 1st Jan 2025" required></textarea>
+
+      <label>Deworming Info:</label>
+      <textarea name="deworming" placeholder="e.g. Next due on 10th July" required></textarea>
+
+      <label>Next Vet Visit:</label>
+      <!-- ✅ This is the key fix -->
+      <textarea name="vet" placeholder="e.g. Scheduled for 20th July" required></textarea>
+
+      <button type="submit">Add Pet</button>
+    </form>
+  </div>
+  <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+
+</body>
+</html>

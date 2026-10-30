@@ -1,0 +1,1514 @@
+:root {
+    /* Define a consistent color palette for easier theming */
+    /* NEW BLUE GRADIENT PALETTE - Adjusted to match logo */
+    --gradient-start: #AEECEF; /* Very light aqua, from your --modern-clean-background */
+    --gradient-middle: #3AAFB9; /* Medium teal, from your --background-light-aqua */
+    --gradient-end: #1B5E6B;    /* Deeper, muted teal/blue, inspired by your logo's darker tones */
+
+    --primary-color: #3b82f6; /* A slightly darker blue for main elements */
+    --primary-dark: #2563eb; /* Darker blue for hover states */
+    --accent-color: #7b68ee; /* Purplish blue for accents/secondary buttons - CONSIDER CHANGING THIS FOR A PURE BLUE THEME */
+    --accent-dark: #6a5acd; /* Darker purplish blue for accent hover - CONSIDER CHANGING THIS FOR A PURE BLUE THEME */
+
+    --background-white: #ffffff; /* White card/content background */
+    --text-color: #333333; /* Soft dark gray for general text (Light Mode) */
+    --text-light: #f0f0f0; /* Light text for dark backgrounds */
+    --border-color: #e2e8f0; /* Very light grey border for inputs */
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-medium: rgba(0, 0, 0, 0.15); /* Slightly less intense shadow */
+    --shadow-strong: rgba(0, 0, 0, 0.25); /* For hover/active states */
+
+    /* Dark Mode Variables */
+    --dark-bg: #1a1a1a; /* Darker background for overall body in dark mode */
+    --dark-text: #e0e0e0; /* Lighter text for dark backgrounds */
+    --dark-card-bg: #2d2d2d; /* Slightly lighter dark for cards */
+    --dark-input-bg: #3a3a3a; /* Input background in dark mode */
+    --dark-border: #555555; /* Border color in dark mode */
+    --dark-shadow: rgba(0, 0, 0, 0.5); /* Darker shadows in dark mode */
+    --dark-placeholder-color: #9e9e9e; /* New: Specific placeholder color for dark mode */
+
+
+    /* Specific dark mode colors for primary/accent elements */
+    --dark-primary-color: #539af1; /* Lighter blue for primary in dark mode */
+    --dark-primary-dark: #3b82f6; /* Original primary for hover in dark mode */
+    --dark-accent-color: #a78bfa; /* Lighter purple for accent in dark mode */
+    --dark-accent-dark: #8b5cf6; /* Original accent for hover in dark mode */
+
+    /* --- NEW CUSTOM COLORS --- */
+    --background-light-aqua: #3AAFB9; /* Updated background */
+    --pet-card-background: #FFD166; /* Updated pet cards background */
+    --feed-background-or-banner: #FFD1FF; /* Updated for feed backgrounds or user profile banners */
+    --modern-clean-background: #AEECEF; /* Updated for dashboards/feed */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    /* Updated background with a gradient matching your logo */
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-middle), var(--gradient-end));
+    background-size: 400% 400%; /* Makes the gradient larger for smoother animation */
+    animation: gradientShift 15s ease infinite; /* Applies the subtle shifting animation */
+
+    color: var(--text-color); /* Default text color for light mode */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    text-align: center;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode Adjustments */
+body.dark-mode {
+    background: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+    background-color: var(--dark-input-bg);
+    color: var(--dark-text);
+    border-color: var(--dark-border);
+}
+
+/* NEW: Placeholder color for dark mode forms */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder,
+body.dark-mode select::placeholder {
+    color: var(--dark-placeholder-color);
+    opacity: 0.8; /* Adjust opacity as needed for readability */
+}
+
+/* NEW: Label color for dark mode forms */
+body.dark-mode label {
+    color: var(--dark-text); /* Ensure labels are visible */
+}
+
+
+body.dark-mode .form-container,
+body.dark-mode .adoption-card,
+body.dark-mode .adoption-info,
+body.dark-mode .post,
+body.dark-mode .terms-container {
+    background-color: var(--dark-card-bg);
+    border-color: var(--dark-border);
+    box-shadow: 0 4px 10px var(--dark-shadow);
+}
+
+body.dark-mode .btn,
+body.dark-mode button {
+    background-color: var(--dark-primary-color);
+    color: var(--dark-text);
+    border: 1px solid var(--dark-border);
+}
+body.dark-mode .btn:hover,
+body.dark-mode button:hover {
+    background-color: var(--dark-primary-dark);
+}
+
+body.dark-mode .add-btn,
+body.dark-mode .small-danger-btn,
+body.dark-mode .danger-btn,
+body.dark-mode .locate-btn {
+    background-color: var(--dark-accent-color);
+    color: var(--dark-text);
+    border: 1px solid var(--dark-border);
+}
+body.dark-mode .add-btn:hover,
+body.dark-mode .small-danger-btn:hover,
+body.dark-mode .danger-btn:hover,
+body.dark-mode .locate-btn:hover {
+    background-color: var(--dark-accent-dark);
+}
+
+body.dark-mode .logout-link,
+body.dark-mode .link-text,
+body.dark-mode .form-container p a,
+body.dark-mode .terms-link {
+    color: var(--dark-accent-color);
+}
+body.dark-mode .logout-link:hover,
+body.dark-mode .link-text:hover,
+body.dark-mode .form-container p a:hover,
+body.dark-mode .terms-link:hover {
+    color: var(--dark-accent-dark);
+}
+
+body.dark-mode .google-button {
+    background-color: #3a3a3a;
+    color: var(--dark-text);
+}
+body.dark-mode .google-button:hover {
+    background-color: #4a4a4a;
+}
+
+body.dark-mode .separator {
+    color: var(--dark-border);
+}
+body.dark-mode .separator::before,
+body.dark-mode .separator::after {
+    background-color: var(--dark-border);
+}
+
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode .homepage-tagline,
+body.dark-mode .post-content p,
+body.dark-mode .profile-info-text p,
+body.dark-mode .adoption-info p,
+body.dark-mode .health-checklist li,
+body.dark-mode .comment strong {
+    color: var(--dark-text);
+}
+
+body.dark-mode .post-user-info .username,
+body.dark-mode .profile-info-text h2,
+body.dark-mode .adoption-info h3 {
+    color: var(--dark-primary-color);
+}
+
+body.dark-mode .dashboard-header,
+body.dark-mode .pawsitive-header,
+body.dark-mode .simple-header {
+    background-color: var(--dark-card-bg);
+    color: var(--dark-text);
+}
+
+/* MODIFIED: Removed border and box-shadow for profile pictures */
+body.dark-mode .profile-pic,
+body.dark-mode .small-profile-pic,
+body.dark-mode .profile-pic-lg {
+    border-color: transparent; /* Changed to transparent */
+    box-shadow: none; /* Removed shadow */
+}
+
+/* Specific header for the home page */
+.home-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.homepage-tagline {
+    text-align: center;
+    font-size: 1.4rem;
+    color: var(--text-color);
+    font-weight: 500;
+    max-width: 90%;
+    line-height: 1.5;
+    margin-bottom: 40px;
+    margin-top: 0;
+}
+
+
+/* Main content for the home page */
+.home-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    padding-bottom: 100px;
+}
+
+.terms-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.terms-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* --- LOGO SIZE ADJUSTMENT (FRONT PAGE) --- */
+.logo-img {
+    max-width: 200px;
+    width: 60%;
+    height: auto;
+    margin-bottom: 40px;
+    display: block;
+}
+
+/* Responsive Adjustments for logo */
+@media (max-width: 768px) {
+    .logo-img {
+        max-width: 150px;
+        width: 75%;
+        margin-bottom: 30px;
+    }
+    .homepage-tagline {
+        margin-bottom: 30px;
+    }
+    .home-content {
+        padding-bottom: 50px;
+    }
+}
+
+
+/* Changed selector from .buttons to .home-buttons based on your HTML */
+.home-buttons {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+.btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px var(--shadow-medium);
+}
+
+/* Form Container Styling */
+.form-container {
+    max-width: 450px;
+    width: 90%;
+    margin: 40px auto;
+    background-color: var(--background-white);
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 25px var(--shadow-medium);
+    color: var(--text-color);
+    text-align: left;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Form Section for Login/Register toggle */
+.form-section {
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+.form-section.hidden {
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+}
+.form-section.active {
+    transform: translateX(0);
+    opacity: 1;
+    position: relative;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+form h2 {
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    font-size: 1.875rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-color); /* Ensure labels are visible in light mode */
+    text-align: left;
+    width: 100%;
+}
+
+input,
+textarea,
+select {
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    color: var(--text-color);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Placeholder text color for inputs and textareas */
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+    color: var(--text-color); /* Keep dark for light mode */
+    opacity: 0.7; /* Slightly transparent for common placeholder effect */
+}
+
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="email"],
+input[type="tel"],
+input[type="file"] {
+    width: 100%;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px var(--shadow-medium);
+}
+
+/* Specific button styles */
+.danger-btn {
+    background-color: var(--accent-color);
+    margin-top: 10px;
+}
+
+.danger-btn:hover {
+    background-color: var(--accent-dark);
+}
+
+.small-danger-btn {
+    background-color: var(--accent-color);
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    width: auto;
+    border-radius: 0.5rem;
+    margin-top: 0;
+    box-shadow: none;
+}
+.small-danger-btn:hover {
+    background-color: var(--accent-dark);
+    transform: none;
+    box-shadow: none;
+}
+
+/* Google Button Styling */
+.google-button {
+    background-color: #1a202c;
+    color: #ffffff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px var(--shadow-light);
+}
+.google-button:hover {
+    background-color: #2d3748;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px var(--shadow-medium);
+}
+.google-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+/* Separator "or" styling */
+.separator {
+    margin: 1rem 0;
+    position: relative;
+    color: #a0aec0;
+    width: 100%;
+    text-align: center;
+}
+.separator::before,
+.separator::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background-color: var(--border-color);
+}
+.separator::before {
+    left: 0;
+}
+.separator::after {
+    right: 0;
+}
+
+/* Link text styling (e.g., "Forgot Password?", "Register here") */
+.link-text,
+.form-container p a {
+    color: var(--primary-color);
+    cursor: pointer;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+.link-text:hover,
+.form-container p a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+
+.dashboard-header {
+    background-color: var(--primary-color);
+    color: white; /* Header text color remains white on the dark blue header background */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    box-shadow: 0 2px 5px var(--shadow-medium);
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+}
+
+/* --- PROFILE PHOTO SIZES --- */
+.profile-pic {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 12px;
+    object-fit: cover;
+    /* MODIFIED: Removed border and box-shadow */
+    border: none;
+    box-shadow: none;
+}
+
+/* Username in the dashboard header - changed to dark for better contrast if header is light */
+.profile-info .username {
+    font-weight: bold;
+    font-size: 1.15rem;
+    color: var(--text-light); /* Keep this white if the header itself is dark blue */
+}
+
+
+.menu {
+    position: relative;
+    z-index: 100;
+}
+
+.hamburger {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.dropdown {
+    position: absolute;
+    top: 55px;
+    right: 0;
+    background-color: var(--background-white);
+    color: var(--text-color); /* Default text color for dropdown */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px var(--shadow-medium);
+    display: flex;
+    flex-direction: column;
+    width: 180px;
+    z-index: 10;
+    overflow: hidden;
+}
+
+/* Dropdown menu links - changed to dark text for better contrast on white background */
+.dropdown a {
+    padding: 12px 15px;
+    text-decoration: none;
+    color: var(--text-color); /* Changed to dark gray for better contrast on white dropdown background */
+    border-bottom: 1px solid #eee;
+    font-size: 1rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dropdown a:last-child {
+    border-bottom: none;
+}
+
+.dropdown a:hover {
+    background-color: #f0f8ff;
+    color: var(--primary-dark);
+}
+
+.hidden {
+    display: none;
+}
+
+.feed {
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    display: grid;
+    gap: 20px;
+    /* Use the new color for feed backgrounds */
+    background-color: var(--feed-background-or-banner);
+    border-radius: 1rem;
+    box-shadow: 0 6px 18px var(--shadow-light);
+}
+
+/* --- DECREASING POST SIZE --- */
+.post {
+    background: var(--background-white);
+    border-radius: 1rem;
+    box-shadow: 0 6px 18px var(--shadow-light);
+    margin-bottom: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 100%;
+}
+
+.post-image {
+    width: 100%;
+    max-height: 400px;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+.post-content {
+    padding: 15px 20px;
+}
+
+.post-user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    font-weight: bold;
+    color: var(--primary-color); /* The primary color is still a good choice for this info */
+    font-size: 1.1rem;
+}
+
+.post-user-info span {
+    font-weight: normal;
+    color: var(--text-color);
+}
+.post-user-info .username {
+    font-weight: bold;
+    color: var(--primary-dark);  /* better contrast */
+}
+.username {
+    color: var(--primary-dark) !important;
+}
+
+.header-username {
+  color: white !important;
+  font-weight: bold;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+
+.small-profile-pic {
+    width: 40px !important;
+    height: 40px !important;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    /* MODIFIED: Removed border and box-shadow */
+    border: none;
+    box-shadow: none;
+}
+
+.post-content p {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+
+.like-button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+.like-button:hover {
+    background-color: var(--accent-dark);
+    transform: translateY(-2px);
+}
+
+.comment-box {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 0.75rem;
+    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+    max-height: 200px;
+}
+
+/* Profile Page Specifics */
+.profile-header {
+    background-color: transparent;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    /* Use the new color for user profile banners */
+    background-color: var(--feed-background-or-banner);
+    border-radius: 1rem;
+    margin: 20px auto;
+    max-width: 900px;
+    box-shadow: 0 6px 18px var(--shadow-light);
+}
+
+.profile-top {
+    display: flex;
+    flex-direction: row; /* horizontal layout */
+    align-items: center;  /* vertically center the text with the image */
+    justify-content: flex-start;
+    gap: 25px;
+    padding: 20px;
+}
+
+
+
+@media (min-width: 600px) {
+    .profile-top {
+        flex-direction: row;
+        justify-content: center;
+        gap: 30px;
+    }
+    /* MODIFIED: Ensure text is left-aligned on larger screens */
+    .profile-info-text {
+        text-align: left;
+    }
+}
+
+/* MODIFIED: Ensure the text is left-aligned on all screens for the profile info text */
+.profile-info-text {
+    text-align: left; /* Ensures text is always left-aligned within this block */
+    width: 100%; /* Ensure it takes full width to align content within itself */
+}
+
+/* MODIFIED: Explicitly left-align the username and paragraph text within the profile info */
+.profile-info-text h2 {
+    margin: 0 0 5px 0;
+    color: var(--primary-dark);
+    font-size: 1.8rem;
+    text-align: left !important; /* Forces left alignment */
+}
+
+.profile-info-text p {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1rem;
+    text-align: left !important; /* Forces left alignment */
+}
+
+/* --- PROFILE PHOTO SIZES (LARGE) --- */
+.profile-pic-lg {
+    width: 160px;
+    height: 160px;
+    border: none;
+    box-shadow: none;
+}
+
+.profile-posts {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.grid-post {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 10px var(--shadow-light);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.grid-post:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px var(--shadow-medium);
+}
+
+.create-post-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 36px;
+    text-align: center;
+    width: 65px;
+    height: 65px;
+    line-height: 65px;
+    border-radius: 50%;
+    text-decoration: none;
+    box-shadow: 0 8px 20px var(--shadow-medium);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    z-index: 99;
+}
+
+.create-post-btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px var(--shadow-strong);
+}
+
+.adoption-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: transparent; /* Keep transparent to show body gradient */
+    color: var(--text-color); /* Ensure heading is dark on light gradient */
+    box-shadow: 0 2px 5px var(--shadow-light);
+}
+
+.adoption-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: var(--text-color); /* Ensure this specific heading is dark */
+}
+
+.add-btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+.add-btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.adoption-cards {
+    padding: 20px;
+    display: grid;
+    gap: 25px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.adoption-card {
+    /* Updated pet card background */
+    background: var(--pet-card-background);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 8px 20px var(--shadow-medium);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.adoption-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px var(--shadow-strong);
+}
+
+.adoption-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.adoption-info {
+    padding: 20px;
+}
+
+.adoption-info h3 {
+    margin: 0 0 10px 0;
+    color: var(--primary-dark);
+    font-size: 1.5rem;
+}
+
+.adoption-info p {
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    color: var(--text-color);
+}
+
+.adoption-info button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    width: auto;
+    margin-top: 10px;
+    box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+.adoption-info button:hover {
+    background-color: var(--accent-dark);
+    transform: translateY(-2px);
+}
+
+.health-checklist ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 10px;
+}
+
+.health-checklist li {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    position: relative;
+    padding-left: 20px;
+}
+.health-checklist li::before {
+    content: '✓';
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+/* Specific class for the "You haven't added any pets yet." message */
+.empty-pets-message {
+    color: var(--text-color); /* Ensure it's visible on the gradient */
+    margin-top: 50px;
+    font-size: 1.1rem;
+}
+.empty-pets-message a {
+    color: var(--primary-color);
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Updated .locator-options styles */
+.locator-options {
+    display: none;
+    gap: 10px;
+}
+
+.locator-options button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 0.75rem;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+.locator-options button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+
+.locate-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 0.75rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+.locate-btn:hover {
+    background-color: var(--accent-dark);
+    transform: translateY(-2px);
+}
+
+.logout-link {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 1rem;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.logout-link:hover {
+    text-decoration: underline;
+    color: var(--accent-dark);
+}
+
+.flash-messages {
+    margin: 15px auto;
+    max-width: 600px;
+    padding: 12px 20px;
+    background-color: #e0f2fe;
+    border-left: 5px solid #38b2ac;
+    color: #2c5282;
+    border-radius: 0.5rem;
+    text-align: left;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 5px var(--shadow-light);
+}
+
+/* Header for Terms & Conditions and Privacy pages */
+.pawsitive-header {
+    text-align: center;
+    padding: 20px;
+    background: var(--primary-color); /* This header has a solid background */
+    color: white;
+    font-size: 2.2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 8px var(--shadow-medium);
+    margin-bottom: 30px;
+}
+
+/* Terms & Conditions / Privacy Page Specific Styles */
+.terms-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1.5rem 2.5rem;
+    background: var(--background-white);
+    color: var(--text-color);
+    border-radius: 1rem;
+    line-height: 1.7;
+    text-align: left;
+    box-shadow: 0 8px 20px var(--shadow-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.terms-container h2 {
+    margin-top: 2rem;
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--primary-color);
+    display: inline-block;
+    white-space: nowrap;
+}
+
+/* Adjust heading styles within the terms container to ensure proper centering */
+.terms-container h2,
+.terms-container h3 {
+    width: 100%;
+    text-align: center;
+}
+
+
+.terms-container p {
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+/* General list styling for terms and privacy pages */
+.terms-container ul {
+    list-style: disc;
+    margin-left: 20px;
+    padding-left: 0;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.terms-container ul li {
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+/* Ensure links within terms/privacy are styled nicely */
+.terms-container a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.terms-container a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* The existing .simple-header rule. Updated for better visibility on gradient */
+.simple-header {
+    text-align: center;
+    padding: 1.5rem;
+    background: transparent; /* Changed to transparent */
+    color: var(--text-color); /* Changed to dark for visibility */
+    font-size: 2rem;
+    font-weight: bold;
+    box-shadow: none; /* Removed shadow for transparent header */
+}
+
+/* Add style for "Back to Feed" link on post creation page */
+.back-link {
+    color: var(--text-color); /* Dark text for light mode */
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px; /* Add some padding if it's a clickable area */
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+.back-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    body {
+        font-size: 0.95rem;
+    }
+
+    .home-content {
+        padding: 15px;
+        padding-bottom: 70px;
+    }
+
+    .logo-img {
+        max-width: 130px;
+        width: 70%;
+        margin-bottom: 30px;
+        display: block;
+    }
+
+    .homepage-tagline {
+        margin-bottom: 30px;
+        font-size: 1.2rem;
+        max-width: 90%;
+    }
+
+    .home-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .btn, button {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+
+    .form-container {
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 1rem;
+    }
+
+    form h2 {
+        font-size: 1.5rem;
+    }
+
+    .dashboard-header {
+        padding: 10px 15px;
+    }
+
+    .profile-pic {
+        width: 35px;
+        height: 35px;
+    }
+    .username {
+        font-size: 1rem;
+    }
+
+    .dropdown {
+        top: 50px;
+        width: 160px;
+    }
+
+    .feed {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .post-image {
+        max-height: 300px;
+    }
+
+    .profile-header {
+        padding: 20px 15px;
+    }
+
+    .profile-pic-lg {
+        width: 100px;
+        height: 100px;
+    }
+
+    /* MODIFIED: Ensure username and text are left-aligned on smaller screens too */
+    .profile-info-text h2 {
+        font-size: 1.6rem;
+        text-align: left !important;
+    }
+
+    /* MODIFIED: Ensure username and text are left-aligned on smaller screens too */
+    .profile-info-text p {
+        font-size: 0.9rem; /* Smaller text for better fit on small screens */
+        text-align: left !important;
+    }
+
+
+    .profile-posts {
+        padding: 15px;
+    }
+
+    .post-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+    }
+    .grid-post {
+        height: 100px;
+    }
+
+    .create-post-btn {
+        width: 55px;
+        height: 55px;
+        line-height: 55px;
+        font-size: 32px;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .adoption-header {
+        padding: 10px 15px;
+    }
+    .adoption-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .add-btn {
+        padding: 8px 14px;
+        font-size: 0.9rem;
+    }
+
+    .adoption-cards {
+        padding: 15px;
+        gap: 15px;
+        grid-template-columns: 1fr;
+    }
+    .adoption-card img {
+        height: 150px;
+    }
+    .adoption-info h3 {
+        font-size: 1.3rem;
+    }
+    .adoption-info button {
+        padding: 8px 14px;
+        font-size: 0.9rem;
+    }
+
+    /* Responsive adjustments for Terms/Privacy pages */
+    .pawsitive-header {
+        font-size: 1.8rem;
+        padding: 15px;
+    }
+
+    .terms-container {
+        padding: 1rem 1.5rem;
+        margin: 1rem auto;
+    }
+    .terms-container h2 {
+        font-size: 1.6rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Even smaller screens (e.g., old smartphones) */
+@media (max-width: 480px) {
+    .logo-img {
+        max-width: 110px;
+        width: 80%;
+    }
+    .form-container {
+        padding: 15px;
+    }
+    .post-grid {
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+        gap: 8px;
+    }
+    .grid-post {
+        height: 90px;
+    }
+    .adoption-cards {
+        grid-template-columns: 1fr;
+    }
+    /* Even smaller screen adjustments for Terms/Privacy pages */
+    .terms-container {
+        padding: 1rem;
+    }
+    .terms-container h2 {
+        font-size: 1.4rem;
+    }
+    .pawsitive-header {
+        font-size: 1.6rem;
+        padding: 12px;
+    }
+}
+
+.toggle-comments-btn {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.comments-section {
+    padding: 10px 15px;
+    border-top: 1px solid var(--border-color);
+    margin-top: 10px;
+}
+
+.comments-section.hidden {
+    display: none;
+}
+
+.comment {
+    margin: 6px 0;
+}
+
+.comment strong {
+    color: var(--text-color);
+}
+
+.comment-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.comment-form input[type="text"] {
+    flex: 1;
+    padding: 6px;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+}
+
+.comment-form button {
+    padding: 6px 10px;
+    border: none;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.comment-form button:hover {
+    background-color: var(--primary-dark);
+}
+.corner-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.corner-button .button {
+    padding: 10px 16px;
+    font-size: 14px;
+    border-radius: 8px;
+    background-color: #4c8eaf; /* Or your site's accent color */
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.corner-button .button:hover {
+    background-color: #1c5d8b;
+}
+
+.dashboard-header {
+  background-color: #3b82f6;
+  padding: 20px;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.profile-header {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #E0E7EB; /* A very light, soft blue-grey */
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.profile-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.profile-pic-lg {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid white;
+}
+
+.profile-text {
+  text-align: left;
+}
+
+.profile-text h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  color: #2F4F4F; /* Dark Slate Grey for username */
+}
+
+.profile-text p {
+  margin: 4px 0 0;
+  font-style: italic;
+  color: #696969; /* Dim Grey for description */
+}
+
+.back-btn {
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #5F9EA0; /* Cadet Blue */
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.back-btn:hover {
+  background-color: #4682B4; /* Steel Blue on hover */
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+.flashes {
+  list-style: none;
+  padding: 10px;
+  margin: 10px;
+}
+.flashes .success {
+  color: #155724;
+  background-color: #d4edda;
+  padding: 10px;
+  border-left: 4px solid #28a745;
+}
+.flashes .error {
+  color: #721c24;
+  background-color: #f8d7da;
+  padding: 10px;
+  border-left: 4px solid #dc3545;
+}
+.read-more {
+  color: #555;
+  font-size: 0.9em;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+.read-more:hover {
+  text-decoration: underline;
+}
+/* Add the animation keyframes for the gradient shift */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}

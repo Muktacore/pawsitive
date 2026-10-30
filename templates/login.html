@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Pawsitive</title>
+    <!-- Link to your external stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Link to Inter font, if you plan to use it -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+   
+    <div class="form-container">
+        <form method="POST" action="/login">
+            <h2>Login</h2>
+
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+
+            <p style="text-align:center; margin-top: 10px;">
+                <a href="#" class="forgot-password-link">Forgot Password?</a>
+            </p>
+
+            <div class="separator">or</div>
+
+            <button type="button" class="google-button">
+                <!-- Google SVG icon placeholder -->
+                <svg class="google-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.24 10.232c-.28.006-.56.01-.84.01-.85 0-1.68-.08-2.48-.22-.84-.15-1.66-.4-2.43-.75-.76-.36-1.46-.8-2.07-1.33-.61-.53-1.12-1.15-1.52-1.85-.4-.7-.68-1.47-.84-2.3-.16-.83-.22-1.7-.18-2.57.04-.87.2-1.72.47-2.53.27-.81.63-1.57 1.07-2.28.44-.71.97-1.36 1.57-1.92.6-.56 1.27-1.05 2-1.45.73-.4 1.5-.68 2.3-.84.8-.16 1.63-.22 2.47-.18.84.04 1.68.2 2.49.47.81.27 1.57.63 2.28 1.07.71.44 1.36.97 1.92 1.57.56.6 1.05 1.27 1.45 2 .4.73.68 1.5.84 2.3.16.8.22 1.63.18 2.47-.04.84-.2 1.68-.47 2.49-.27.81-.63 1.57-1.07 2.28-.44-.71-.97-1.36-1.57-1.92-.6-.56-1.27-1.05-2-1.45-.73-.4-1.5-.68-2.3-.84-.8-.16-1.63-.22-2.47-.18z" fill="#4285F4"/>
+                    <path d="M12 11.72c-2.41 0-4.41-1.96-4.41-4.38S9.59 2.96 12 2.96s4.41 1.96 4.41 4.38-1.96 4.38-4.41 4.38z" fill="#EA4335"/>
+                    <path d="M12 11.72c-2.41 0-4.41-1.96-4.41-4.38S9.59 2.96 12 2.96s4.41 1.96 4.41 4.38-1.96 4.38-4.41 4.38z" fill="#FBBC04"/>
+                    <path d="M12 11.72c-2.41 0-4.41-1.96-4.41-4.38S9.59 2.96 12 2.96s4.41 1.96 4.41 4.38-1.96 4.38-4.41 4.38z" fill="#34A853"/>
+                </svg>
+                Continue with Google
+            </button>
+
+            <p style="text-align:center; margin-top: 10px;">
+                Don't have an account? <a href="{{ url_for('register') }}">Register here</a>.
+            </p>
+        </form>
+
+        <!-- Flash messages placeholder -->
+       
+    </div>
+    <!-- You can add any necessary JavaScript here, if it's not styling-related -->
+</body>
+</html>

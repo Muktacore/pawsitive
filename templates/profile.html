@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Profile - Pawsitive</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <header class="dashboard-header">
+  <div class="profile-header">
+    <div class="profile-top">
+      <img src="{{ url_for('static', filename='uploads/' + user['profile_pic']) }}"
+           class="profile-pic-lg" alt="Profile Picture">
+      <div class="profile-text">
+        <h2>@{{ user['username'] }}</h2>
+        <p>"{{ user['bio'] }}"</p>
+      </div>
+    </div>
+    <a href="{{ url_for('feed') }}" class="back-btn">← Feed</a>
+  </div>
+</header>
+
+  <main class="feed">
+    {% for post in posts %}
+    <div class="post">
+      <img class="post-image" src="{{ url_for('static', filename='uploads/' + post['media']) }}" alt="Post">
+      <div class="post-content">
+        <p>{{ post['caption'] }}</p>
+
+        <form method="POST" action="{{ url_for('like', post_id=post['id']) }}">
+          <button type="submit" class="like-btn">
+            {% if post['liked'] %}
+              ❤️
+            {% else %}
+              🤍
+            {% endif %}
+            {{ post['like_count'] }}
+          </button>
+        </form>
+
+        <form method="POST" action="{{ url_for('delete_post', post_id=post['id']) }}">
+          <button type="submit" class="small-danger-btn">Delete</button>
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+  </main>
+  <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+
+</body>
+</html>

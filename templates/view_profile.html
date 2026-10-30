@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>@{{ profile_user['username'] }}'s Profile - Pawsitive</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <header class="dashboard-header">
+    <div class="profile-info">
+      <img src="{{ url_for('static', filename='uploads/' + profile_user['profile_pic']) }}" class="small-profile-pic" alt="User">
+      <div>
+        <span class="header-username">@{{ profile_user['username'] }}</span>
+        <p>{{ profile_user['name'] }}</p>
+      </div>
+    </div>
+    <div class="menu">
+      <a href="{{ url_for('feed') }}">⬅ Back to Feed</a>
+    </div>
+  </header>
+
+  <section class="profile-section">
+    <h2>About</h2>
+    <p><strong>Bio:</strong> {{ profile_user['bio'] or 'No bio available.' }}</p>
+    <p><strong>Email:</strong> {{ profile_user['email'] }}</p>
+    <p><strong>Phone:</strong> {{ profile_user['phone'] }}</p>
+    <p><strong>Account Type:</strong> {{ profile_user['account_type'] }}</p>
+  </section>
+
+  <section class="user-posts">
+    <h2>@{{ profile_user['username'] }}'s Posts</h2>
+    <div class="feed">
+      {% for post in posts %}
+      <div class="post">
+        <img class="post-image" src="{{ url_for('static', filename='uploads/' + post['media']) }}" alt="Post">
+        <div class="post-content">
+          <p>{{ post['caption'] }}</p>
+        </div>
+      </div>
+      {% else %}
+      <p style="text-align:center;">No posts yet.</p>
+      {% endfor %}
+    </div>
+  </section>
+
+  <script src="{{ url_for('static', filename='js/ui.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+</body>
+</html>

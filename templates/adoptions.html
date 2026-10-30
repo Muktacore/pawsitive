@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pawsitive - Adoptions</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <style>
+    .adoption-extra {
+      display: none;
+      margin-top: 10px;
+      background: #f8f8f8;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.95em;
+    }
+    .adoption-card.expanded .adoption-extra {
+      display: block;
+    }
+    .adopt-btn {
+      margin-top: 8px;
+      padding: 8px 16px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .adopt-btn:hover {
+      background-color: #388E3C;
+    }
+  </style>
+</head>
+<body>
+  <header class="adoption-header">
+    <h2>Pets for Adoption</h2>
+    <a href="{{ url_for('add_adoption') }}" class="add-btn">Add +</a>
+  </header>
+
+  <main class="adoption-cards">
+    {% if adoptions %}
+      {% for pet in adoptions %}
+        <div class="adoption-card">
+          <img src="{{ url_for('static', filename='uploads/' + pet['photo']) }}" alt="Pet" />
+          <div class="adoption-info">
+
+            <p class="details">
+              {% if pet['details']|length > 150 %}
+                <span class="short-text">{{ pet['details'][:150] }}...</span>
+                <span class="full-text" style="display: none;">{{ pet['details'] }}</span>
+                <a href="#" class="read-toggle">Read more</a>
+              {% else %}
+                {{ pet['details'] }}
+              {% endif %}
+              </p>
+
+            <button class="adopt-btn" onclick="toggleAdoption(this)">Adopt</button>
+
+            <div class="adoption-extra">
+              <p><strong>Contact Name:</strong> {{ pet['contact_name'] }}</p>
+              <p><strong>Phone:</strong> {{ pet['contact_number'] }}</p>
+              <p><strong>Location:</strong> {{ pet['location'] }}</p>
+
+              <form method="POST" action="{{ url_for('delete_adoption', adoption_id=pet['id']) }}">
+                <button type="submit" class="small-danger-btn" style="margin-top: 8px;">Delete Listing</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p style="text-align:center; padding: 20px;">No pets listed for adoption yet. <a href="{{ url_for('add_adoption') }}">List one now</a>.</p>
+    {% endif %}
+  </main>
+
+  <script>
+    function toggleAdoption(button) {
+      const card = button.closest('.adoption-card');
+      card.classList.toggle('expanded');
+    }
+  </script>
+  <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+  <script>
+  document.querySelectorAll('.read-toggle').forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      const parent = this.parentElement;
+      const shortText = parent.querySelector('.short-text');
+      const fullText = parent.querySelector('.full-text');
+
+      const isExpanded = shortText.style.display === 'none';
+      shortText.style.display = isExpanded ? '' : 'none';
+      fullText.style.display = isExpanded ? 'none' : '';
+      this.textContent = isExpanded ? 'Read more' : 'Read less';
+    });
+  });
+</script>
+
+
+</body>
+</html>

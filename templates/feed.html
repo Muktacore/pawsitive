@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pawsitive Feed</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <header class="dashboard-header">
+    <div class="profile-info">
+      <img src="{{ url_for('static', filename='uploads/' + user['profile_pic']) }}"
+           class="small-profile-pic"
+           alt="User">
+      <a href="{{ url_for('profile') }}" class="header-username">@{{ user['username'] }}</a>
+    </div>
+
+    <div class="menu">
+      <button class="hamburger" id="hamburger">☰</button>
+      <div class="dropdown hidden" id="dropdownMenu">
+        <a href="{{ url_for('mypets') }}">My Pets</a>
+        <a href="{{ url_for('adoptions') }}">Adoptions</a>
+        <a href="{{ url_for('settings') }}">Settings</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="feed">
+    {% for post in posts %}
+    {% set poster = users_map.get(post['username']) %}
+    <div class="post">
+        <div class="profile-info">
+            {% if poster %}
+               <img src="{{ url_for('static', filename='uploads/' + poster['profile_pic']) }}"
+                  class="small-profile-pic"
+                  alt="{{ poster['username'] }}">
+               <a href="{{ url_for('view_profile', username=poster['username']) }}" class="username">
+               @{{ poster['username'] }}
+               </a>
+           {% else %}
+               <span class="username">@Unknown</span>
+           {% endif %}
+       </div>
+
+
+      <img class="post-image" src="{{ url_for('static', filename='uploads/' + post['media']) }}" alt="Post">
+
+      <div class="post-content">
+        <p class="caption" data-full="{{ post['caption'] }}">
+          {% if post['caption']|length > 100 %}
+            <span class="short-text">{{ post['caption'][:100] }}...</span>
+            <span class="full-text" style="display: none;">{{ post['caption'] }}</span>
+            <a href="#" class="read-toggle">Read more</a>
+          {% else %}
+            {{ post['caption'] }}
+          {% endif %}
+        </p>
+
+        <div class="post-interaction-row">
+            <form method="POST" action="{{ url_for('like', post_id=post['id']) }}">
+              <button type="submit" class="like-btn">
+                {% if post['liked'] %}
+                  ❤️
+                {% else %}
+                  🤍
+                {% endif %}
+                {{ post['like_count'] }}
+              </button>
+            </form>
+
+            {% set post_id = post["id"] %}
+            <button class="toggle-comments-btn" onclick="toggleComments('{{ post_id }}')">
+              💬 Comments ({{ comments_by_post.get(post_id, [])|length }})
+            </button>
+        </div>
+
+        {% if post['username'] == user['username'] %}
+        <form method="POST" action="{{ url_for('delete_post', post_id=post['id']) }}" class="delete-post-form">
+          <button type="submit" class="small-danger-btn">Delete</button>
+        </form>
+        {% endif %}
+
+        <div class="comments-section hidden" id="comments-{{ post['id'] }}">
+          {% for comment in comments_by_post.get(post['id'], []) %}
+          <div class="comment">
+            <strong>@{{ comment['username'] }}</strong>: {{ comment['comment_text'] }}
+          </div>
+          {% endfor %}
+
+          <form action="{{ url_for('comment') }}" method="POST" class="comment-form">
+            <input type="hidden" name="post_id" value="{{ post['id'] }}">
+            <input type="text" name="comment_text" placeholder="Add a comment..." required>
+            <button type="submit">Post</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <a href="{{ url_for('create_post_page') }}" class="create-post-btn">+</a>
+
+  <script src="{{ url_for('static', filename='js/ui.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+
+  <script>
+    function toggleComments(postId) {
+      const section = document.getElementById(`comments-${postId}`);
+      section.classList.toggle('hidden');
+    }
+
+    document.querySelectorAll('.read-toggle').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const caption = this.closest('.caption');
+        const shortText = caption.querySelector('.short-text');
+        const fullText = caption.querySelector('.full-text');
+
+        if (shortText.style.display === 'none') {
+          shortText.style.display = '';
+          fullText.style.display = 'none';
+          this.textContent = 'Read more';
+        } else {
+          shortText.style.display = 'none';
+          fullText.style.display = '';
+          this.textContent = 'Read less';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

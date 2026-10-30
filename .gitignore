@@ -1,0 +1,18 @@
+# Database
+*.db
+*.sqlite3
+
+# User uploads (keep the folder)
+static/uploads/*
+!static/uploads/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+env/
+
+# Secrets
+.env
+.env.*
